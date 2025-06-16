@@ -5,13 +5,20 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 import useTodo from "../context/TodoContext";
 
 const AddTodo = () => {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState();
   const [description, setDescription] = useState();
-  const { addTodo } = useTodo();
+
+  const { addTodo, updateTodo } = useTodo();
+
+  const navigateToHome = () => {
+    addTodo(title);
+    setDescription("");
+    setTitle("");
+  };
 
   return (
     <View style={styles.container}>
-      <Text> Titile </Text>
+      <Text> Title </Text>
       <TextInput
         value={title}
         onChangeText={setTitle}
@@ -29,8 +36,8 @@ const AddTodo = () => {
         selectionColor={"blue"}
       />
 
-      <TouchableOpacity style={styles.button} onPress={() => addTodo({title,description})}>
-        <Text style={styles.textStyle} > Add Task</Text>
+      <TouchableOpacity style={styles.button} onPress={navigateToHome}>
+        <Text style={styles.textStyle}> Add Task</Text>
       </TouchableOpacity>
     </View>
   );

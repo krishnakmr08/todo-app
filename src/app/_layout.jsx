@@ -3,12 +3,14 @@ import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { TodoProvider } from "../context/TodoContext";
 
+
+
+
 const Layout = () => {
-  const [todos, setTodos] = useState([
-  ]);
+  const [todos, setTodos] = useState([]);
 
   const addTodo = (todo) => {
-    setTodos(() => [{ id: Date.now(), todo, complete: false }, ...todos]);
+    setTodos(() => [{ id: todos.length + 1, todo, complete: false }, ...todos]);
   };
   const updateTodo = (id, todo) => {
     setTodos((prev) =>

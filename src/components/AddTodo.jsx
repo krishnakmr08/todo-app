@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { windowHeight } from "../utils/dimensions";
 
-console.log(windowHeight);
+
 const AddTodo = () => {
   const navigateToAddTodo = () => {
     router.navigate("/addTodo");

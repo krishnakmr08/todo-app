@@ -9,22 +9,27 @@ import {
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import useTodo from "../context/TodoContext";
 const TodoItem = ({ item }) => {
-  const { deleteTodo, todos } = useTodo();
-  console.log(item?.id);
+  const { deleteTodo,updateTodo   } = useTodo();
+  console.log(item);
+
+  
+ 
+
   return (
     <View style={styles.container}>
-      <Text style={styles.textStyle}>{item.title}</Text>
-      <Text style={styles.textStyle}>{item.description}</Text>
+      <Text style={styles.textStyle}>{item.todo.title}</Text>
+      <Text style={styles.textStyle}>{item.todo.description}</Text>
 
-      <TouchableOpacity style={styles.removeContainer}>
-        <MaterialIcons
-          name="delete"
-          color="#fff"
-          size={30}
-          onPress={() => deleteTodo(item?.id)}
-        />
+      <TouchableOpacity
+        onPress={() => deleteTodo(item?.id)}
+        style={styles.removeContainer}
+      >
+        <MaterialIcons name="delete" color="#fff" size={30} />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.editContainer}>
+      <TouchableOpacity
+        style={styles.editContainer}
+        
+      >
         <MaterialIcons name="edit" color="blue" size={35} />
       </TouchableOpacity>
     </View>
