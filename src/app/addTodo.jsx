@@ -1,28 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import { StyleSheet, Text, TextInput, View } from "react-native";
-import AddOrUpdate from "../components/AddOrUpdate";
-import useTodo from "../context/TodoContext";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 const AddTask = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const { addTodo, editPrevTodo, setEditPrevTodo } = useTodo();
-
-  useEffect(() => {
-    if (editPrevTodo) {
-      setTitle(editPrevTodo.todo);
-    }
-    setEditPrevTodo(null);
-  }, []);
-
-  const addTodos = () => {
-    addTodo(title);
-  };
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState();
 
   return (
     <View style={styles.container}>
-      <Text> Title </Text>
+      <Text> Titile </Text>
       <TextInput
         value={title}
         onChangeText={setTitle}
@@ -40,7 +26,9 @@ const AddTask = () => {
         selectionColor={"blue"}
       />
 
-      <AddOrUpdate header={"Add Task"} onPress={addTodo} />
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.textStyle}> Add Task</Text>
+      </TouchableOpacity>
     </View>
   );
 };

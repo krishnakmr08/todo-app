@@ -5,10 +5,9 @@ import { TodoProvider } from "../context/TodoContext";
 
 const Layout = () => {
   const [todos, setTodos] = useState([]);
-  const [editPrevTodo, setEditPrevTodo] = useState({});
 
   const addTodo = (todo) => {
-    setTodos(() => [{ id: todos.length + 1, todo, complete: false }, ...todos]);
+    setTodos(() => [{ id: Date.now(), todo, complete: false }, ...todos]);
   };
   const updateTodo = (id, todo) => {
     setTodos((prev) =>
@@ -26,8 +25,7 @@ const Layout = () => {
         addTodo,
         updateTodo,
         deleteTodo,
-        editPrevTodo,
-        setEditPrevTodo,
+        
       }}
     >
       <Stack>
