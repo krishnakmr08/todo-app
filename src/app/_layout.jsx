@@ -3,11 +3,9 @@ import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { TodoProvider } from "../context/TodoContext";
 
-
-
-
 const Layout = () => {
   const [todos, setTodos] = useState([]);
+  const [editPrevTodo, setEditPrevTodo] = useState({});
 
   const addTodo = (todo) => {
     setTodos(() => [{ id: todos.length + 1, todo, complete: false }, ...todos]);
@@ -20,15 +18,6 @@ const Layout = () => {
   const deleteTodo = (id) => {
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
-  const toggleCheckbox = (id) => {
-    setTodos((prev) => {
-      prev.map((prevTodo) =>
-        prevTodo.id === id
-          ? { ...prevTodo, complete: !prevTodo.complete }
-          : prevTodo
-      );
-    });
-  };
 
   return (
     <TodoProvider
@@ -37,7 +26,8 @@ const Layout = () => {
         addTodo,
         updateTodo,
         deleteTodo,
-        toggleCheckbox,
+        editPrevTodo,
+        setEditPrevTodo,
       }}
     >
       <Stack>

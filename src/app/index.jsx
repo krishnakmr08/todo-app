@@ -43,4 +43,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
   },
+  titleInput: {
+    width: "90%",
+    height: 40,
+    paddingLeft: 5,
+    borderWidth: 1,
+  },
+  descriptionInput: {
+    height: 60,
+    width: "90%",
+    paddingLeft: 5,
+    borderWidth: 1,
+  },
 });

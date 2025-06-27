@@ -1,19 +1,23 @@
-import { useState } from "react";
-import { TouchableOpacity } from "react-native";
+import { useEffect, useState } from "react";
 
 import { StyleSheet, Text, TextInput, View } from "react-native";
+import AddOrUpdate from "../components/AddOrUpdate";
 import useTodo from "../context/TodoContext";
 
-const AddTodo = () => {
-  const [title, setTitle] = useState();
-  const [description, setDescription] = useState();
+const AddTask = () => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const { addTodo, editPrevTodo, setEditPrevTodo } = useTodo();
 
-  const { addTodo, updateTodo } = useTodo();
+  useEffect(() => {
+    if (editPrevTodo) {
+      setTitle(editPrevTodo.todo);
+    }
+    setEditPrevTodo(null);
+  }, []);
 
-  const navigateToHome = () => {
+  const addTodos = () => {
     addTodo(title);
-    setDescription("");
-    setTitle("");
   };
 
   return (
@@ -23,7 +27,7 @@ const AddTodo = () => {
         value={title}
         onChangeText={setTitle}
         style={styles.titleInput}
-        maxLength={233}
+        maxLength={250}
         selectionColor={"green"}
       />
       <Text> description</Text>
@@ -36,14 +40,12 @@ const AddTodo = () => {
         selectionColor={"blue"}
       />
 
-      <TouchableOpacity style={styles.button} onPress={navigateToHome}>
-        <Text style={styles.textStyle}> Add Task</Text>
-      </TouchableOpacity>
+      <AddOrUpdate header={"Add Task"} onPress={addTodo} />
     </View>
   );
 };
 
-export default AddTodo;
+export default AddTask;
 
 const styles = StyleSheet.create({
   container: {
@@ -54,12 +56,13 @@ const styles = StyleSheet.create({
   },
   titleInput: {
     width: "90%",
-    height: 40,
+    height: 60,
     paddingLeft: 5,
+    paddingBottom: 28,
     borderWidth: 1,
   },
   descriptionInput: {
-    height: 60,
+    height: 100,
     width: "90%",
     paddingLeft: 5,
     borderWidth: 1,
