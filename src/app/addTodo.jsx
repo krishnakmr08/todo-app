@@ -13,28 +13,17 @@ import useTodo from "../context/TodoContext";
 const AddTask = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const { addTodo, editPrevTodo, setEditPrevTodo, updateTodo,  } =
-    useTodo();
+  const { addTodo, editPrevTodo, setEditPrevTodo, updateTodo } = useTodo();
 
   const setTextInput = () => {
     if (!editPrevTodo) return;
-    else if (editPrevTodo) {
+    else  {
       setDescription(editPrevTodo.todo?.description);
       setTitle(editPrevTodo.todo?.title);
-    } else {
-      if (title === editPrevTodo.todo?.title) {
-        setTitle("");
-        setDescription("");
-      }
-    }
+    } 
   };
 
-  const clearTextInput = () => {
-    if (title === editPrevTodo.todo?.title) {
-      setTitle("");
-      setDescription("");
-    }
-  };
+  
 
   useEffect(() => {
     setTextInput();
@@ -42,15 +31,14 @@ const AddTask = () => {
       if (title === editPrevTodo.todo?.title) {
         setTitle("");
         setDescription("");
-        setEditPrevTodo("")
+        setEditPrevTodo("");
       }
     };
-  }, [title,editPrevTodo]);
+  }, [title, editPrevTodo]);
 
   const updateTask = () => {
     updateTodo(editPrevTodo.id, { title, description });
     setEditPrevTodo("");
-
   };
   const addTask = () => {
     addTodo({ title, description });
