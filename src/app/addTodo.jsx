@@ -1,10 +1,61 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { router } from "expo-router";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import useTodo from "../context/TodoContext";
 
 const AddTask = () => {
-  const [title, setTitle] = useState();
-  const [description, setDescription] = useState();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const { addTodo, editPrevTodo, setEditPrevTodo, updateTodo,  } =
+    useTodo();
+
+  const setTextInput = () => {
+    if (!editPrevTodo) return;
+    else if (editPrevTodo) {
+      setDescription(editPrevTodo.todo?.description);
+      setTitle(editPrevTodo.todo?.title);
+    } else {
+      if (title === editPrevTodo.todo?.title) {
+        setTitle("");
+        setDescription("");
+      }
+    }
+  };
+
+  const clearTextInput = () => {
+    if (title === editPrevTodo.todo?.title) {
+      setTitle("");
+      setDescription("");
+    }
+  };
+
+  useEffect(() => {
+    setTextInput();
+    return () => {
+      if (title === editPrevTodo.todo?.title) {
+        setTitle("");
+        setDescription("");
+        setEditPrevTodo("")
+      }
+    };
+  }, [title,editPrevTodo]);
+
+  const updateTask = () => {
+    updateTodo(editPrevTodo.id, { title, description });
+    setEditPrevTodo("");
+
+  };
+  const addTask = () => {
+    addTodo({ title, description });
+    router.back();
+  };
 
   return (
     <View style={styles.container}>
@@ -26,8 +77,11 @@ const AddTask = () => {
         selectionColor={"blue"}
       />
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={addTask}>
         <Text style={styles.textStyle}> Add Task</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={updateTask}>
+        <Text style={styles.textStyle}>updateTask</Text>
       </TouchableOpacity>
     </View>
   );

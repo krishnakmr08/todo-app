@@ -1,17 +1,17 @@
 import { Stack } from "expo-router";
 import { useState } from "react";
-import { StyleSheet } from "react-native";
 import { TodoProvider } from "../context/TodoContext";
 
 const Layout = () => {
   const [todos, setTodos] = useState([]);
-
+  const [editPrevTodo,setEditPrevTodo] =useState({})
+    
   const addTodo = (todo) => {
-    setTodos(() => [{ id: Date.now(), todo, complete: false }, ...todos]);
+    setTodos(() => [{ id: Date.now(), todo}, ...todos]);
   };
   const updateTodo = (id, todo) => {
     setTodos((prev) =>
-      prev.map((prevTodo) => (prevTodo.id === id ? todo : prevTodo))
+      prev.map((prevTodo) => (prevTodo.id === id ? {id,todo} : prevTodo))
     );
   };
   const deleteTodo = (id) => {
@@ -25,7 +25,8 @@ const Layout = () => {
         addTodo,
         updateTodo,
         deleteTodo,
-        
+        editPrevTodo,
+        setEditPrevTodo
       }}
     >
       <Stack>
@@ -38,4 +39,4 @@ const Layout = () => {
 
 export default Layout;
 
-const styles = StyleSheet.create({});
+

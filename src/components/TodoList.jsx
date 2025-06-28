@@ -8,16 +8,22 @@ import {
 
 import useTodo from "../context/TodoContext";
 
+import { router } from "expo-router";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const TodoItem = ({ item }) => {
-  const { deleteTodo } = useTodo();
-  
+  const { deleteTodo, setEditPrevTodo } = useTodo();
+
+  const updateTask = () => {
+    router.navigate("/addTodo");
+    setEditPrevTodo(item);
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textStyle}>{item.todo.title}</Text>
-      <Text style={styles.textStyle}>{item.todo.description}</Text>
+      <Text style={styles.textStyle}>{item.todo?.title}</Text>
+
+      <Text style={styles.textStyle}>{item.todo?.description}</Text>
 
       <TouchableOpacity
         onPress={() => deleteTodo(item?.id)}
@@ -25,7 +31,7 @@ const TodoItem = ({ item }) => {
       >
         <MaterialIcons name="delete" color="#fff" size={30} />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.editContainer}>
+      <TouchableOpacity style={styles.editContainer} onPress={updateTask}>
         <MaterialIcons name="edit" color="blue" size={35} />
       </TouchableOpacity>
     </View>

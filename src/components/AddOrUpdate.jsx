@@ -1,8 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-const AddOrUpdate = ({ header ,onPress}) => {
+const AddOrUpdate = ({ header, updateTask }) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress} >
+    <TouchableOpacity style={styles.button} onPress={updateTask}>
       <Text style={styles.textStyle}> {header}</Text>
     </TouchableOpacity>
   );
