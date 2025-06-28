@@ -21,9 +21,7 @@ const TodoItem = ({ item }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textStyle}>{item.todo?.title}</Text>
-
-      <Text style={styles.textStyle}>{item.todo?.description}</Text>
+      <Text style={styles.textStyle}>{item.todo}</Text>
 
       <TouchableOpacity
         onPress={() => deleteTodo(item?.id)}

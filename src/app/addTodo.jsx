@@ -1,46 +1,27 @@
 import { useEffect, useState } from "react";
 
 import { router } from "expo-router";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
+import CustomButton from "../components/CusTomButton";
 import useTodo from "../context/TodoContext";
 
 const AddTask = () => {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
   const { addTodo, editPrevTodo, setEditPrevTodo, updateTodo } = useTodo();
 
-  const setTextInput = () => {
-    if (!editPrevTodo) return;
-    else {
-      setDescription(editPrevTodo.todo?.description);
-      setTitle(editPrevTodo.todo?.title);
-    }
-  };
-
   useEffect(() => {
-    setTextInput();
-    return () => {
-      if (title === editPrevTodo.todo?.title) {
-        setTitle("");
-        setDescription("");
-        setEditPrevTodo("");
-      }
-    };
-  }, [title, editPrevTodo]);
+    setTitle(editPrevTodo?.todo);
 
-  const updateTask = () => {
-    updateTodo(editPrevTodo.id, { title, description });
-    setEditPrevTodo("");
+    return () => setEditPrevTodo("");
+  }, []);
+
+  const addTask = () => {
+    addTodo(title);
+    setTitle("");
     router.back();
   };
-  const addTask = () => {
-    addTodo({ title, description });
+  const updateTask = () => {
+    updateTodo(editPrevTodo.id, title);
     router.back();
   };
 
@@ -54,22 +35,12 @@ const AddTask = () => {
         maxLength={250}
         selectionColor={"green"}
       />
-      <Text> description</Text>
-      <TextInput
-        value={description}
-        onChangeText={setDescription}
-        style={styles.descriptionInput}
-        maxLength={100}
-        multiline={true}
-        selectionColor={"blue"}
-      />
 
-      <TouchableOpacity style={styles.button} onPress={addTask}>
-        <Text style={styles.textStyle}> Add Task</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={updateTask}>
-        <Text style={styles.textStyle}>updateTask</Text>
-      </TouchableOpacity>
+      {editPrevTodo ? (
+        <CustomButton task="Update Task" handleTask={updateTask} />
+      ) : (
+        <CustomButton task="Add Task" handleTask={addTask} />
+      )}
     </View>
   );
 };

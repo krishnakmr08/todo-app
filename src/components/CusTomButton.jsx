@@ -1,14 +1,14 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-const AddOrUpdate = ({ header, updateTask }) => {
+const CustomButton = ({ task, handleTask }) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={updateTask}>
-      <Text style={styles.textStyle}> {header}</Text>
+    <TouchableOpacity style={styles.button} onPress={handleTask}>
+      <Text style={styles.textStyle}> {task}</Text>
     </TouchableOpacity>
   );
 };
 
-export default AddOrUpdate;
+export default CustomButton;
 
 const styles = StyleSheet.create({
   button: {

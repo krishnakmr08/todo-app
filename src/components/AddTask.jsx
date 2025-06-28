@@ -4,7 +4,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import { windowHeight } from "../utils/dimensions";
 
 
-const AddTodo = () => {
+const AddTask = () => {
   const navigateToAddTodo = () => {
     router.navigate("/addTodo");
   };
@@ -16,7 +16,7 @@ const AddTodo = () => {
   );
 };
 
-export default AddTodo;
+export default AddTask;
 
 const styles = StyleSheet.create({
   container: {

@@ -2,14 +2,14 @@ import TodoList from "@/components/TodoList";
 import { windowHeight } from "@/utils/dimensions";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import AddTodo from "../components/AddTodo";
+import AddTask from "../components/AddTask";
 
 const HomeScreen = () => {
   return (
     <>
       <SafeAreaView style={styles.parentContainer}>
         <View style={styles.container}>
-          <AddTodo />
+          <AddTask />
         </View>
         <View
           style={{
