@@ -17,13 +17,11 @@ const AddTask = () => {
 
   const setTextInput = () => {
     if (!editPrevTodo) return;
-    else  {
+    else {
       setDescription(editPrevTodo.todo?.description);
       setTitle(editPrevTodo.todo?.title);
-    } 
+    }
   };
-
-  
 
   useEffect(() => {
     setTextInput();
@@ -39,6 +37,7 @@ const AddTask = () => {
   const updateTask = () => {
     updateTodo(editPrevTodo.id, { title, description });
     setEditPrevTodo("");
+    router.back();
   };
   const addTask = () => {
     addTodo({ title, description });
