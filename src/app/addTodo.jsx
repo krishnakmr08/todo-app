@@ -6,31 +6,31 @@ import CustomButton from "../components/CusTomButton";
 import useTodo from "../context/TodoContext";
 
 const AddTask = () => {
-  const [title, setTitle] = useState("");
-  const { addTodo, editPrevTodo, setEditPrevTodo, updateTodo } = useTodo();
+  const [task, setTask] = useState("");
+  const { addTodo, editPrevTodo, setEditPrevTodo, updateTodo,} =
+    useTodo();
 
   useEffect(() => {
-    setTitle(editPrevTodo?.todo);
-
-    return () => setEditPrevTodo("");
+    setTask(editPrevTodo?.todo);
+    return () => {
+      setEditPrevTodo("");
+    };
   }, []);
-
   const addTask = () => {
-    addTodo(title);
-    setTitle("");
-    router.back();
+    addTodo(task);
+    setTask("");
   };
   const updateTask = () => {
-    updateTodo(editPrevTodo.id, title);
+    updateTodo(editPrevTodo.id, task);
     router.back();
   };
 
   return (
     <View style={styles.container}>
-      <Text> Titile </Text>
+      <Text> Write Your Today Task </Text>
       <TextInput
-        value={title}
-        onChangeText={setTitle}
+        value={task}
+        onChangeText={setTask}
         style={styles.titleInput}
         maxLength={250}
         selectionColor={"green"}

@@ -4,14 +4,16 @@ import { TodoProvider } from "../context/TodoContext";
 
 const Layout = () => {
   const [todos, setTodos] = useState([]);
-  const [editPrevTodo,setEditPrevTodo] =useState(null)
-    
+  const [editPrevTodo, setEditPrevTodo] = useState(null);
+
   const addTodo = (todo) => {
-    setTodos(() => [{ id: Date.now(), todo}, ...todos]);
+    setTodos(() => [{ id: todos.length + 1, todo }, ...todos]);
   };
   const updateTodo = (id, todo) => {
     setTodos((prev) =>
-      prev.map((prevTodo) => (prevTodo.id === id ? {id,todo} : prevTodo))
+      prev.map((prevTodo) =>
+        prevTodo.id === id ? { ...prevTodo, todo } : prevTodo
+      )
     );
   };
   const deleteTodo = (id) => {
@@ -26,7 +28,7 @@ const Layout = () => {
         updateTodo,
         deleteTodo,
         editPrevTodo,
-        setEditPrevTodo
+        setEditPrevTodo,
       }}
     >
       <Stack>
@@ -38,5 +40,3 @@ const Layout = () => {
 };
 
 export default Layout;
-
-
