@@ -7,7 +7,7 @@ const Layout = () => {
   const [editPrevTodo, setEditPrevTodo] = useState(null);
 
   const addTodo = (todo) => {
-    setTodos(() => [{ id: todos.length + 1, todo }, ...todos]);
+    setTodos(() => [{ id: Date.now(), todo }, ...todos]);
   };
   const updateTodo = (id, todo) => {
     setTodos((prev) =>

@@ -12,7 +12,6 @@ import { router } from "expo-router";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const TodoItem = ({ item }) => {
-  
   const { deleteTodo, setEditPrevTodo } = useTodo();
 
   const updateTask = () => {
